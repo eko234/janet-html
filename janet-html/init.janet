@@ -35,9 +35,6 @@
             character) s)))
 
 (defn tag [tag-name attrs]
-  (pp tag-name)
-  (pp attrs)
-  (pp (type attrs))
   (assert (or (= (type attrs) :table)
               (= (type attrs) :struct)) #NOTE is?
           (string "Missing attrs table: " tag-name))
@@ -53,9 +50,6 @@
     (and allow-no-escape? (= (document 1) :NO-ESCAPE))
     (document 2)
     (let [[tag-name attrs body] (apply (fn [first second & rest] [first second rest]) document)]
-      (pp tag-name)
-      (pp attrs)
-      (pp body)
       (if (void-tag? tag-name)
         (tag tag-name attrs)
         (string (tag tag-name attrs)
